@@ -15,7 +15,7 @@ func (cfg *Config) Parse() error {
 		return err
 	}
 
-	addr := pflag.StringP("addr", "a", cfg.Addr, "Server address")
+	addr := pflag.StringP("addr", "a", cfg.Addr, "App address")
 	pflag.Parse()
 
 	cfg.Addr = *addr
