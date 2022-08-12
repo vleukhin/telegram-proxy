@@ -12,10 +12,13 @@ import (
 func main() {
 	cfg := internal.Config{}
 	if err := cfg.Parse(); err != nil {
-		log.Fatal().Msg(err.Error())
+		log.Fatal().Err(err).Msg("Failed to parse config")
 	}
 
-	app := internal.NewApp(cfg)
+	app, err := internal.NewApp(cfg)
+	if err != nil {
+		log.Fatal().Err(err).Msg("Failed to create app")
+	}
 	errChan := make(chan error)
 	sigChan := make(chan os.Signal, 1)
 

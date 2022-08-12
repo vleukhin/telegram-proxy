@@ -18,25 +18,25 @@ func NewSMSHandler(proxy *proxy.Proxy) *SMSHandler {
 
 func (h *SMSHandler) ProxyMessage(w http.ResponseWriter, r *http.Request) {
 	query := r.URL.Query()
-	userIDraw, ok := query["user_id"]
-	if !ok || len(userIDraw) == 0 || userIDraw[0] == "" {
+	userIDraw := query.Get("user_id")
+	if userIDraw == "" {
 		log.Warn().Msg("Empty user ID")
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
 
-	userID, err := strconv.Atoi(userIDraw[0])
+	userID, err := strconv.Atoi(userIDraw)
 	if err != nil {
-		log.Warn().Msgf("Bad user ID: ", userIDraw[0])
+		log.Warn().Msgf("Bad user ID: ", userIDraw)
 		w.WriteHeader(http.StatusBadRequest)
 	}
 
-	text, ok := query["text"]
-	if !ok || len(text) == 0 || text[0] == "" {
+	text := query.Get("text")
+	if text == "" {
 		log.Warn().Msg("Empty text")
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
 
-	h.proxy.SendMessage(userID, text[0])
+	h.proxy.SendMessage(userID, text)
 }

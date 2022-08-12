@@ -4,6 +4,7 @@ go 1.18
 
 require (
 	github.com/caarlos0/env/v6 v6.9.3 // indirect
+	github.com/go-telegram-bot-api/telegram-bot-api/v5 v5.5.1 // indirect
 	github.com/gorilla/mux v1.8.0 // indirect
 	github.com/mattn/go-colorable v0.1.12 // indirect
 	github.com/mattn/go-isatty v0.0.14 // indirect

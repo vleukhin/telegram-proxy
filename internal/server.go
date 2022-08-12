@@ -17,13 +17,16 @@ type (
 	}
 )
 
-func NewApp(cfg Config) *App {
-	proxy := proxy2.NewProxy()
+func NewApp(cfg Config) (*App, error) {
+	proxy, err := proxy2.NewProxy(cfg.BotToken)
+	if err != nil {
+		return nil, err
+	}
 
 	return &App{
 		proxy: proxy,
 		cfg:   cfg,
-	}
+	}, nil
 }
 
 func (a *App) Run(err chan<- error) {

@@ -6,7 +6,8 @@ import (
 )
 
 type Config struct {
-	Addr string `env:"ADDRESS" envDefault:"localhost:8080"`
+	Addr     string `env:"ADDRESS" envDefault:"localhost:8080"`
+	BotToken string `env:"BOT_TOKEN"`
 }
 
 func (cfg *Config) Parse() error {
@@ -16,8 +17,10 @@ func (cfg *Config) Parse() error {
 	}
 
 	addr := pflag.StringP("addr", "a", cfg.Addr, "App address")
+	token := pflag.StringP("token", "t", cfg.BotToken, "Telegram bot token")
 	pflag.Parse()
 
 	cfg.Addr = *addr
+	cfg.BotToken = *token
 	return nil
 }
