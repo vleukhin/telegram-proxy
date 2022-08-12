@@ -4,4 +4,4 @@ build:
 	go build -o ./bin/tg-proxy
 
 run:
-	./bin/tg-proxy -a=$(ADDRESS) -t=$(BOT_TOKEN)
+	./bin/tg-proxy -a=$(ADDRESS) -t=$(BOT_TOKEN) > log.txt 2>&1 &
